@@ -1,0 +1,2 @@
+﻿- Serveri ei sulje yhteyksiä kunnolla -> crash
+- Serveri välillä sulkee yhteydet 2 kertaa -> crash
