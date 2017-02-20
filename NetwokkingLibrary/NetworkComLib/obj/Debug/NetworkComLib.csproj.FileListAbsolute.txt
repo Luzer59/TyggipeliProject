@@ -1,5 +1,0 @@
-c:\users\mikkojuu\documents\visual studio 2015\Projects\NetworkComLib\NetworkComLib\bin\Debug\NetworkComLib.dll
-c:\users\mikkojuu\documents\visual studio 2015\Projects\NetworkComLib\NetworkComLib\bin\Debug\NetworkComLib.pdb
-c:\users\mikkojuu\documents\visual studio 2015\Projects\NetworkComLib\NetworkComLib\obj\Debug\NetworkComLib.dll
-c:\users\mikkojuu\documents\visual studio 2015\Projects\NetworkComLib\NetworkComLib\obj\Debug\NetworkComLib.pdb
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\NetworkComLib\NetworkComLib\obj\Debug\NetworkComLib.csprojResolveAssemblyReference.cache

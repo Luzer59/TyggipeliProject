@@ -1,7 +1,0 @@
-c:\users\mikkojuu\documents\visual studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\bin\Debug\TyggipeliOverNetwork_server.exe.config
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\bin\Debug\TyggipeliOverNetwork_server.exe
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\bin\Debug\TyggipeliOverNetwork_server.pdb
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\obj\Debug\TyggipeliOverNetwork_server.csprojResolveAssemblyReference.cache
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\obj\Debug\TyggipeliOverNetwork_server.exe
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\obj\Debug\TyggipeliOverNetwork_server.pdb
-C:\Users\mikkojuu\Documents\Visual Studio 2015\Projects\TyggipeliOverNetwork_server\TyggipeliOverNetwork_server\bin\Debug\NetworkComLib.dll
