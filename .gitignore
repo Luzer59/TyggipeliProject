@@ -9,7 +9,6 @@ Assets/AssetStoreTools*
 /Game/ExportedObj/
 *.csproj
 *.unityproj
-*.sln
 *.suo
 *.tmp
 *.user
