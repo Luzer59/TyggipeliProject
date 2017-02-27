@@ -67,7 +67,7 @@ namespace QuantiCode.Netwokking
 
                 for (int i = 0; i < lenght; i++)
                 {
-                    if (_receiveQueue[i].Length > 0)
+                    if (_receiveQueue[0] != null && _receiveQueue[0].Length > 0)
                     {
                         NetworkDataPacket packet = (NetworkDataPacket)Formating.ByteArrayToObject(_receiveQueue[0]);
                         message[i] = packet.message;
@@ -128,7 +128,7 @@ namespace QuantiCode.Netwokking
             }
         }
 
-        void SendToOthers(byte[] bytes)
+        /*void SendToOthers(byte[] bytes)
         {
             for (int i = 0; i < _server.connections.Count; i++)
             {
@@ -137,7 +137,7 @@ namespace QuantiCode.Netwokking
                     _server.connections[i].Send(bytes);
                 }
             }
-        }
+        }*/
 
         void ReceiveThreadLoop()
         {
@@ -151,6 +151,7 @@ namespace QuantiCode.Netwokking
 
                     _socket.Receive(bytes);
                     //Console.WriteLine("Received data from {0}", _socket.RemoteEndPoint.ToString());
+                    //Console.WriteLine(bytes.Length);
 
                     if (bytes == null || bytes.Length == 0)
                     {
@@ -159,12 +160,12 @@ namespace QuantiCode.Netwokking
                     }
                     else
                     {
-                        /*lock (_receiveLock)
+                        lock (_receiveLock)
                         {
                             _receiveQueue.Add(bytes);
-                        }*/
+                        }
 
-                        SendToOthers(bytes);
+                        //SendToOthers(bytes);
                     }
                 }
                 catch (SocketException)

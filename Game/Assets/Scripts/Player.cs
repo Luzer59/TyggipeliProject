@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    public float maxHealth;
     public float moveSpeed;
     public float aimSpeed;
     public Transform barrel;
@@ -11,35 +12,35 @@ public class Player : MonoBehaviour
     public GameObject projectile;
     public float maxFuel;
     public float powerSpeed;
+    public float powerMultiplier = 1f;
 
+    private float health;
     private float position;
     private float angle;
     private float fuel;
     private float power = 50f;
     private bool active = true;
 
-    void Start()
+    private GameController gc;
+    public GameController.Turn p;
+
+    public float GetHealth()
     {
-        TurnStart();
+        return health;
     }
 
-    void Update()
+    public float GetPower()
     {
-        if (active)
-        {
-            UpdatePosition();
-            Aim();
-            Shoot();
-        }
+        return power;
     }
 
-    public void TurnStart()
+    public void Initialize(GameController gc)
     {
-        fuel = maxFuel;
-
+        this.gc = gc;
+        health = maxHealth;
         for (int i = 0; i < 100; i++)
         {
-            float newPos = Random.value;
+            float newPos = Mathf.Clamp(Random.value, 0.1f, 0.9f);
             Vector2 pos;
             if (MyTerrain.instance.GetMapPosition(newPos, out pos, 1f, cliffAngleLimit))
             {
@@ -48,6 +49,31 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void Update()
+    {
+        if (active && gc.turn == p)
+        {
+            UpdatePosition();
+            Aim();
+            Shoot();
+        }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health <= 0f)
+        {
+            gc.GameEnd();
+            Destroy(gameObject);
+        }
+    }
+
+    public void TurnStart()
+    {
+        fuel = maxFuel;
 
         active = true;
     }
@@ -110,18 +136,20 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             power += powerSpeed * Time.deltaTime;
-            power = Mathf.Clamp(power, 0f, 100f);
+            power = Mathf.Clamp(power, 0f, 100f) * powerMultiplier;
         }
         if (Input.GetKey(KeyCode.S))
         {
             power -= powerSpeed * Time.deltaTime;
-            power = Mathf.Clamp(power, 0f, 100f);
+            power = Mathf.Clamp(power, 0f, 100f) * powerMultiplier;
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject go = Instantiate(projectile, barrelEnd.position, Quaternion.identity) as GameObject;
-            go.GetComponent<Projectile>().Shoot(Quaternion.Euler(0f, 0f, angle) * Vector3.up * power);
-            //active = false;
+            Projectile proj = go.GetComponent<Projectile>();
+            proj.Initialize(gc);
+            proj.Shoot(Quaternion.Euler(0f, 0f, angle) * Vector3.up * power);
+            TurnEnd();
         }
     }
 }

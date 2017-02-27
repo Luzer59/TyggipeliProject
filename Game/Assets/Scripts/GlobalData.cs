@@ -10,4 +10,6 @@ public class GlobalData : MonoBehaviour
         get { return _gravity * physicsScale; }
         set { _gravity = value; }
     }
+
+    public static float[] map;
 }

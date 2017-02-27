@@ -49,9 +49,17 @@ public class MyTerrain : MonoBehaviour
         CenterTerrain();
     }
 
+    public void GenerateMap(float[] map)
+    {
+        _map = map;
+        GenerateTerrainMesh();
+        AssingTerrainMesh();
+        CenterTerrain();
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             GenerateMap();
         }

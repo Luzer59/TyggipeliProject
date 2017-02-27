@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Net;
 using QuantiCode.Netwokking;
 
-public class StartClientButton : MonoBehaviour
+public class UI_StartClientButton : MonoBehaviour
 {
     public InputField portInput;
     public InputField ipInput;

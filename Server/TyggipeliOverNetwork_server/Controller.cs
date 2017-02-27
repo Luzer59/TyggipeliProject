@@ -6,65 +6,52 @@ using System.Threading;
 using System.Net;
 using QuantiCode.Netwokking;
 
-namespace QuantiCode.Netwokking
+class Controller
 {
-    class Controller
-    {
-        private Server server;
+    private Server server;
+    private Logic logic;
+    private Thread updateThread;
 
-        public void Start()
+    public void Start()
+    {
+        StartServer();
+        InputThread();           
+    }
+
+    void UpdateThread()
+    {
+        while (true)
         {
-            string input;
-            while (true)
+            server.Update();
+            logic.Update();
+        }
+    }
+
+    void StartServer()
+    {
+        server = new Server();
+        server.OpenServer(7777);
+        Console.WriteLine("Server started. Waiting for connections...");
+        logic = new Logic();
+        logic.Initialize(server);
+        updateThread = new Thread(UpdateThread);
+        updateThread.Start();
+    }
+
+    void InputThread()
+    {       
+        string input;
+        while (true)
+        {
+            // Console.WriteLine("Give port");
+            input = Console.ReadLine();
+            /*int port;
+            if (int.TryParse(input, out port))
             {
                 server = new Server();
-                server.OpenServer(7777);
-                Console.WriteLine("Server started. Waiting for connections...");
-                RegisterEvents();
+                server.OpenServer(port);
                 break;
-                /*Console.WriteLine("Give port");
-                input = Console.ReadLine();
-                int port;
-                if (int.TryParse(input, out port))
-                {
-                    server = new Server();
-                    server.OpenServer(port);
-                    break;
-                }*/
-            }
-            
-            while (true)
-            {
-                server.Update();
-                /*for (int i = 0; i < 10; i++)
-                    Thread.Sleep(10);
-                server.CloseServer();
-                break;*/
-            }
-        }
-
-        void RegisterEvents()
-        {
-            server.connectionAddedEvent += ConnectionAdded;
-            server.connectionClosedEvent += ConnectionClosed;
-            server.dataReceivedEvent += DataReceived;
-        }
-
-        void ConnectionAdded(uint conId)
-        {
-            server.SendAll(NetworkMessages.connectionCountChanged, server.connectionCount);
-            Console.WriteLine("Connection added with id " + conId);
-        }
-
-        void ConnectionClosed(uint conId)
-        {
-            server.SendAll(NetworkMessages.connectionCountChanged, server.connectionCount);
-            Console.WriteLine("Connection closed with id " + conId);
-        }
-
-        void DataReceived(string message, object data, uint senderId)
-        {
-            Console.WriteLine("Data received from " + senderId + " with message: " + message);
+            }*/
         }
     }
 }

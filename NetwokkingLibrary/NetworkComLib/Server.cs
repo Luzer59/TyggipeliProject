@@ -105,15 +105,30 @@ namespace QuantiCode.Netwokking
             }
         }
 
-        public void Update()
+        public void SendOthers(string message, object data, uint id)
         {
+            for (int i = 0; i < connections.Count; i++)
+            {
+                if (connections[i].id != id)
+                {
+                    connections[i].Send(message, data);
+                }
+            }
+        }
+
+        public void Update()
+        {   
             for (int p = 0; p < connections.Count; p++)
             {
+                //Console.WriteLine("asd1");
                 string[] message;
                 object[] data;
+                //Console.WriteLine("asd2");
                 connections[p].Receive(out message, out data);
+                //Console.WriteLine("asd3");
                 for (int i = 0; i < message.Length; i++)
                 {
+                    //Console.WriteLine("asd");
                     dataReceivedEvent.Invoke(message[i], data[i], connections[p].id);
                 }
             }

@@ -2,13 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UpdateConnectionCount : MonoBehaviour
+public class UI_UpdateConnectionCount : MonoBehaviour
 {
     public Text text;
 
     void Start()
     {
-        NetworkClient.instance.clientCreatedEvent += Activate;
+        //NetworkClient.instance.clientCreatedEvent += Activate;
     }
 
     void Activate()

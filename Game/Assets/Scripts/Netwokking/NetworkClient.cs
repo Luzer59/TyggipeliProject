@@ -11,6 +11,11 @@ public class NetworkClient : MonoBehaviour
     public static NetworkClient instance;
     public event Action clientCreatedEvent = delegate { };
 
+    public bool isConnected
+    {
+        get { return _client.isConnected; }
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -20,7 +25,10 @@ public class NetworkClient : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void TestListener(string message, object data)
@@ -43,6 +51,7 @@ public class NetworkClient : MonoBehaviour
         clientCreatedEvent.Invoke();
         _client.OpenClient(ip, port);     
         Debug.Log("Client started");
+        Debug.Log(_client);
     }
 
     public void CloseClient()
@@ -57,13 +66,16 @@ public class NetworkClient : MonoBehaviour
 
     public void SendData(string message, object data)
     {
-        _client.Send(message, data);
+        Debug.Log(message);
+        bool asd =_client.Send(message, data);
+        Debug.Log(asd);
     }
 
     void Update()
     {
         if (_client != null)
         {
+            //Debug.Log(_client);
             _client.Update();
         }
     }

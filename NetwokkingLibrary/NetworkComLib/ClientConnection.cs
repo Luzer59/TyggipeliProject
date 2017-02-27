@@ -60,7 +60,7 @@ namespace QuantiCode.Netwokking
 
                 for (int i = 0; i < lenght; i++)
                 {
-                    if (_receiveQueue[i].Length > 0)
+                    if (_receiveQueue[0] != null && _receiveQueue[0].Length > 0)
                     {
                         NetworkDataPacket packet = (NetworkDataPacket)Formating.ByteArrayToObject(_receiveQueue[0]);
                         message[i] = packet.message;

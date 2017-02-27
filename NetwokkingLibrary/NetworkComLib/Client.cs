@@ -22,6 +22,20 @@ namespace QuantiCode.Netwokking
         public event Action disconnectedEvent = delegate { };
 
         internal ClientConnection connection = null;
+        public bool isConnected
+        {
+            get
+            {
+                if (connection != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         internal ClientSender sender = null;
 
         public void OpenClient(IPAddress ipAddress, int port)
@@ -49,9 +63,17 @@ namespace QuantiCode.Netwokking
             }
         }
 
-        public void Send(string message, object data)
+        public bool Send(string message, object data)
         {
-            connection.Send(message, data);
+            if (connection != null)
+            {
+                connection.Send(message, data);
+                return true;
+            }
+            else
+            {
+                return false;
+            } 
         }
 
         public void Update()
